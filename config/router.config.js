@@ -17,7 +17,7 @@ export default [
       {
         path: '/',
         component: '../layouts/BasicLayout',
-        authority: ['admin', 'user'],
+        authority: ['admin', 'coco'],
         routes: [
           {
             path: '/',
@@ -29,6 +29,85 @@ export default [
             icon: 'smile',
             component: './Welcome',
           },
+          // user manage
+          {
+            path: '/third',
+            name: 'third',
+            icon: "usergroup-add",
+            routes: [
+              {
+                path: '/third/list',
+                name: 'list',
+                component: './third/index',
+              }
+            ]
+          },
+          // article
+          {
+            path: '/article',
+            name: 'article',
+            icon: "file-markdown",
+            routes: [
+              {
+                path: '/article/list',
+                name: 'list',
+                component: './article/index',
+              }
+            ]
+          },
+          // message
+          {
+            path: '/message',
+            name: 'message',
+            icon: "message",
+            routes: [
+              {
+                path: '/message/list',
+                name: 'list',
+                component: './message/index',
+              }
+            ]
+          },
+          // tag
+          {
+            path: '/tag',
+            name: 'tag',
+            icon: "tags",
+            routes: [
+              {
+                path: '/tag/list',
+                name: 'list',
+                component: './tag/index',
+              }
+            ]
+          },
+          // categery
+          {
+            path: '/category',
+            name: 'category',
+            icon: "qrcode",
+            routes: [
+              {
+                path: '/category/list',
+                name: 'list',
+                component: './category/index', 
+              }
+            ]
+          },
+          // project
+          {
+            path: '/project',
+            name: 'project',
+            icon: "project",
+            routes: [
+              {
+                path: '/project/list',
+                name: 'list',
+                component: './project/index',
+              }
+            ]
+          },
+
           {
             component: './404',
           },
