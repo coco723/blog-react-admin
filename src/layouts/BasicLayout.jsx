@@ -24,7 +24,7 @@ const menuDataRender = menuList =>
 
 const footerRender = (_, defaultDom) => {
   if (!isAntDesignPro()) {
-    return defaultDom;
+    return React.cloneElement(defaultDom, { links: [], copyright: '2019 created by coco' });
   }
 
   return (

@@ -4,6 +4,7 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -24,18 +25,25 @@ const codeMessage = {
 /**
  * 异常处理程序
  */
+const errorMessage = response => {
+  if (response.data && response.data.message) {
+    return response.data.message;
+  }
+  return codeMessage[response.status] || response.statusText;
+};
 
 const errorHandler = error => {
   const { response } = error;
 
   if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
+    const errorText = errorMessage(response);
     const { status, url } = response;
     notification.error({
       message: `请求错误 ${status}: ${url}`,
       description: errorText,
     });
-  } else if (!response) {
+  }
+  if (!response) {
     notification.error({
       description: '您的网络发生异常，无法连接服务器',
       message: '网络异常',
@@ -51,6 +59,7 @@ const errorHandler = error => {
 const request = extend({
   errorHandler,
   // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
+  credentials: 'include', // 默认请求带上cookie
 });
+
 export default request;

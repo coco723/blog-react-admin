@@ -5,7 +5,7 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
 export const isUrl = path => reg.test(path);
 export const isAntDesignPro = () => {
   if (BLOG_ADMIN === 'site') {
-    return true;
+    return false;
   }
 
   return window.location.hostname === 'preview.pro.ant.design';

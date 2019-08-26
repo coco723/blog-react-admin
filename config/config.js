@@ -2,7 +2,7 @@ import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 
 import slash from 'slash2';
 import webpackPlugin from './plugin.config';
-import pageRoutes from './router.config'
+import pageRoutes from './router.config';
 const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 
@@ -88,10 +88,7 @@ export default {
   theme: {
     'primary-color': primaryColor,
   },
-  define: {
-    BLOG_ADMIN:
-      BLOG_ADMIN || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-  },
+  define: { BLOG_ADMIN: BLOG_ADMIN || '' },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
@@ -126,13 +123,12 @@ export default {
     basePath: '/',
   },
   chainWebpack: webpackPlugin,
-  /*
-  proxy: {
-    '/server/api/': {
-      target: 'https://preview.pro.ant.design/',
-      changeOrigin: true,
-      pathRewrite: { '^/server': '' },
-    },
-  },
-  */
+
+  // proxy: {
+  //   '/api/': {
+  //     target: 'https://127.0.0.1:3000',
+  //     changeOrigin: true,
+  //     pathRewrite: { '^': '' },
+  //   },
+  // },
 };

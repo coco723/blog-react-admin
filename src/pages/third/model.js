@@ -1,7 +1,7 @@
-import { queryList, removeList } from '@/services/third';
+import { queryList } from './service';
 
 export default {
-  namespace: 'list',
+  namespace: 'third',
 
   state: {
     data: {
