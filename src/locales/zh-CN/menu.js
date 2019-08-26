@@ -53,4 +53,12 @@ export default {
   'menu.third.list': "用户列表",
   'menu.article': "文章管理",
   'menu.article.list': "文章列表",
+  'menu.message': '留言管理',
+  'menu.message.list': '留言列表',
+  'menu.tag': '标签管理',
+  'menu.tag.list': '标签列表',
+  'menu.category': '分类管理',
+  'menu.category.list': '分类列表',
+  'menu.project': '项目管理',
+  'menu.project.list': '项目列表',
 };

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "dva";
 
+@connect(({article, loading}) => ({
+  article,
+  loading: loading.models.article,
+}))
 class Article extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {}
+
   render() {
     return (
       <div>article</div>
