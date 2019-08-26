@@ -1,5 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "dva";
 
+@connect(({ message, loading}) => ({
+  message,
+  loading: loading.models.message,
+}))
 class Message extends Component {
   constructor(props) {
     super(props);
@@ -12,3 +17,5 @@ class Message extends Component {
     )
   }
 }
+
+export default Message;
