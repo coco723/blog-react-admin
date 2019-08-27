@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "dva";
+import React, { Component } from 'react';
+import { connect } from 'dva';
 
 @connect(({ category, loading }) => ({
   category,
@@ -8,17 +8,13 @@ import { connect } from "dva";
 class Category extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   render() {
-    return (
-      <div>category</div>
-    )
+    return <div>category</div>;
   }
 }
 

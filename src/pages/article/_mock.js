@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const data = {
   list: [
     {
@@ -75,8 +77,8 @@ function getThirdList(req, res) {
 }
 
 function deleteThird(req, res) {
-  // eslint
   const { _id } = req.body;
+  console.log('.........');
   const list = data.list.filter(item => item._id !== _id);
   return res.json({
     data: {

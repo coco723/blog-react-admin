@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { GridContent } from '@ant-design/pro-layout';
-import { Card, Form, Input, Row, Col, Button, Badge, Modal } from 'antd';
+import { Card, Form, Input, Row, Col, Button, Badge, Modal, Tag } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import styles from './index.less';
 
@@ -115,11 +115,15 @@ class Third extends Component {
     // eslint-disable-next-line
     const { _id } = this.state;
     dispatch({
-      type: 'third/fetch',
+      type: 'third/remove',
       payload: {
         // eslint-disable-next-line
         _id,
       },
+    });
+    this.setState({
+      _id: undefined,
+      visible: false,
     });
   };
 
@@ -127,12 +131,14 @@ class Third extends Component {
     const {
       third: { data },
       loading,
+      form: { getFieldDecorator },
     } = this.props;
     const { visible } = this.state;
     const columns = [
       {
         title: '头像',
         dataIndex: 'avatar',
+        key: 'avatar',
         render: (text, record) => (
           <img alt={record.name} src={text} style={{ width: 50, height: 50, borderRadius: 50 }} />
         ),
@@ -140,22 +146,27 @@ class Third extends Component {
       {
         title: '用户名',
         dataIndex: 'name',
+        key: 'name',
       },
       {
         title: '邮箱',
         dataIndex: 'email',
+        key: 'email',
       },
       {
         title: '手机号',
         dataIndex: 'phone',
+        key: 'phone',
       },
       {
         title: '个人介绍',
         dataIndex: 'introduce',
+        key: 'instroduce',
       },
       {
         title: '用户类型',
         dataIndex: 'type',
+        key: 'type',
         filters: [
           {
             text: type[0],
@@ -179,53 +190,57 @@ class Third extends Component {
           },
         ],
         render(val) {
-          return <Badge status={typeMap[val]} text={type[val]} />;
+          return <Tag key={typeMap[val]}>{type[val]}</Tag>;
         },
       },
       {
         title: '创建时间',
         dataIndex: 'create_time',
-        sorter: true,
+        key: 'create_time',
       },
       {
         title: '操作',
         dataIndex: '',
-        render: (text, record) => <Button onClick={this.showModal}>删除</Button>,
+        render: (text, record) => (
+          <Button
+            onClick={e => {
+              e.preventDefault();
+              this.showModal(record);
+            }}
+          >
+            删除
+          </Button>
+        ),
       },
     ];
 
-    const renderForm = () => {
-      const {
-        form: { getFieldDecorator },
-      } = this.props;
-      return (
-        <Form onSubmit={this.handleSearch} layout="inline">
-          <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-            <Col md={8} sm={24}>
-              <Form.Item label="用户名">
-                {getFieldDecorator('name')(<Input placeholder="请输入" />)}
-              </Form.Item>
-            </Col>
-            <Col md={8} sm={24}>
-              <span className={styles.submitButtons}>
-                <Button type="primary" htmlType="submit">
-                  查询
-                </Button>
-                <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-                  重置
-                </Button>
-              </span>
-            </Col>
-          </Row>
-        </Form>
-      );
-    };
+    const renderForm = (
+      <Form onSubmit={this.handleSearch} layout="inline">
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <Form.Item label="用户名">
+              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            </Form.Item>
+          </Col>
+          <Col md={8} sm={24}>
+            <span className={styles.submitButtons}>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
+                重置
+              </Button>
+            </span>
+          </Col>
+        </Row>
+      </Form>
+    );
 
     return (
       <GridContent>
         <Card bordered={false} title="用户列表">
           <div className={styles.tableList}>
-            <div className={styles.tableListForm}>{renderForm()}</div>
+            <div className={styles.tableListForm}>{renderForm}</div>
             <StandardTable
               loading={loading}
               // eslint-disable-next-line

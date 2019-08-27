@@ -6,7 +6,7 @@ export async function queryList(params) {
 }
 
 export async function remove(params) {
-  return request('/api/third', {
+  return request(`/api/third`, {
     method: 'delete',
     data: params,
   });

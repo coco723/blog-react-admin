@@ -1,4 +1,4 @@
-import { queryList } from './service';
+import { queryList, remove } from './service';
 
 export default {
   namespace: 'third',
@@ -18,14 +18,14 @@ export default {
         payload: response.data,
       });
     },
-    // *remove({ payload, callback }, { call, put }) {
-    //   const response = yield call(removeList, payload);
-    //   yield put({
-    //     type: 'save',
-    //     payload: response.data,
-    //   });
-    //   if (callback) callback();
-    // },
+    *remove({ payload, callback }, { call, put }) {
+      const response = yield call(remove, payload);
+      yield put({
+        type: 'save',
+        payload: response.data,
+      });
+      if (callback) callback();
+    },
   },
 
   reducers: {
