@@ -1,46 +1,60 @@
-import moment from 'moment';
-
 const data = {
   list: [
     {
-      name: 'CoCoyh',
-      type: 2,
-      phone: '',
-      email: '1352118502@qq.com',
-      introduce: '',
-      avatar: 'https://avatars1.githubusercontent.com/u/24558814?v=4',
-      _id: '5d106f901a9b12a2e0fc9af4',
-      create_time: '2019-06-24 06:37:04',
+      views: 7,
+      likes: 0,
+      keyword: ['ge'],
+      desc: '',
+      img_url:
+        'https://upload-images.jianshu.io/upload_images/12890819-80fa7517ab3f2783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240',
+      type: 1,
+      state: 1,
+      origin: 0,
+      tags: [],
+      comments: [],
+      category: [],
+      id: '5d202e7fe831c675b90019c1',
+      title: 'test',
+      author: 'coco',
+      create_time: '2019-07-06 05:15:43',
     },
     {
-      name: 'coco',
-      type: 0,
-      phone: '2434',
-      email: '1352118502@qq.com',
-      introduce: 'nihdhfk',
-      avatar: 'http://prn8lcgbf.bkt.clouddn.com/avatar/1.jpeg',
-      _id: '5d10622dc2dc15a11c9f1cd5',
-      create_time: '2019-06-24 05:39:57',
-    },
-    {
-      name: 'user',
-      type: 0,
-      phone: '15623455678',
-      email: '1367636@163.com',
-      introduce: 'nihao',
-      avatar: 'user',
-      _id: '5d0dc30fa86a82640a859a3d',
-      create_time: '2019-06-22 05:56:31',
-    },
-    {
-      name: 'admin',
-      type: 0,
-      phone: '15623455678',
-      email: '13685747636@163.com',
-      introduce: 'nihao',
-      avatar: 'user',
-      _id: '5d0dc2eba86a82640a859a3c',
-      create_time: '2019-08-27 14:50:07',
+      views: 4,
+      likes: 0,
+      keyword: ['nuhuh'],
+      desc: 'ggg',
+      img_url:
+        'https://upload-images.jianshu.io/upload_images/12890819-80fa7517ab3f2783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240',
+      type: 1,
+      state: 1,
+      origin: 0,
+      tags: [
+        {
+          _id: '5d10984a1a9b12a2e0fc9afa',
+          name: 'MySql',
+          desc: 'MySql',
+          create_time: '2019-06-24 09:30:50',
+          update_time: '2019-06-24 09:30:50',
+          id: 2,
+          __v: 0,
+        },
+      ],
+      comments: [],
+      category: [
+        {
+          desc: 'MongoDB',
+          _id: '5d1191d81a9b12a2e0fc9afb',
+          name: 'MongoDB',
+          create_time: '2019-06-25 03:15:36',
+          update_time: '2019-06-25 03:15:36',
+          id: 1,
+          __v: 0,
+        },
+      ],
+      id: '5d2011f9e831c675b90019c0',
+      title: 'lele',
+      author: 'coco',
+      create_time: '2019-07-06 03:14:01',
     },
   ],
   pagination: {
@@ -50,39 +64,51 @@ const data = {
   },
 };
 
-function getThirdList(req, res) {
+function getArticleList(req, res) {
   const params = req.query;
-  const { name, type, sorter } = params;
-  const typeList = type ? type.split(',') : [];
-  let list = data.list;
-  if (name) {
-    list = list.filter(item => item.name === name);
+  console.log('params = ', params);
+  const { title, state, sorter, origin } = params;
+  const stateList = state ? state.split(',') : [];
+  const originList = origin ? origin.split(',') : [];
+  let result = data.list;
+  if (title) {
+    result = result.filter(item => item.title === title);
   }
-  if (typeList.length > 0) {
-    list = list.filter(item => typeList.includes(item.type.toString()));
+  if (stateList.length > 0) {
+    result = result.filter(item => stateList.includes(item.state.toString()));
+  }
+
+  if (originList.length > 0) {
+    result = result.filter(item => stateList.includes(item.origin.toString()));
   }
 
   if (sorter) {
     const s = sorter.split('_');
-    list = list.sort((prev, next) => {
+    result = result.sort((prev, next) => {
       if (s[0] === 'descend') {
         return next[s[0]] - prev[s[0]];
       }
       return prev[s[0]] - next[s[0]];
     });
   }
-  data.list = list;
-  data.pagination.total = list.length;
-  return res.json({ data });
-}
-
-function deleteThird(req, res) {
-  const { _id } = req.body;
-  console.log('.........');
-  const list = data.list.filter(item => item._id !== _id);
   return res.json({
     data: {
-      list: list,
+      list: result,
+      pagination: {
+        total: result.length,
+        pageSize: 10,
+        pageIndex: 0,
+      },
+    },
+  });
+}
+
+function deleteArticle(req, res) {
+  const { id } = req.body;
+  const list = data.list.filter(item => item.id !== id);
+  return res.json({
+    data: {
+      list,
       pagination: {
         total: list.length,
         pageSize: 10,
@@ -93,6 +119,6 @@ function deleteThird(req, res) {
 }
 
 export default {
-  'get  /api/third_list': getThirdList,
-  'delete /api/third': deleteThird,
+  'get  /api/article_list': getArticleList,
+  'delete /api/article': deleteArticle,
 };

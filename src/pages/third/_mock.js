@@ -7,7 +7,7 @@ const data = {
       email: '1352118502@qq.com',
       introduce: '',
       avatar: 'https://avatars1.githubusercontent.com/u/24558814?v=4',
-      _id: '5d106f901a9b12a2e0fc9af4',
+      id: '5d106f901a9b12a2e0fc9af4',
       create_time: '2019-06-24 06:37:04',
     },
     {
@@ -17,7 +17,7 @@ const data = {
       email: '1352118502@qq.com',
       introduce: 'nihdhfk',
       avatar: 'http://prn8lcgbf.bkt.clouddn.com/avatar/1.jpeg',
-      _id: '5d10622dc2dc15a11c9f1cd5',
+      id: '5d10622dc2dc15a11c9f1cd5',
       create_time: '2019-06-24 05:39:57',
     },
     {
@@ -27,7 +27,7 @@ const data = {
       email: '1367636@163.com',
       introduce: 'nihao',
       avatar: 'user',
-      _id: '5d0dc30fa86a82640a859a3d',
+      id: '5d0dc30fa86a82640a859a3d',
       create_time: '2019-06-22 05:56:31',
     },
     {
@@ -37,7 +37,7 @@ const data = {
       email: '13685747636@163.com',
       introduce: 'nihao',
       avatar: 'user',
-      _id: '5d0dc2eba86a82640a859a3c',
+      id: '5d0dc2eba86a82640a859a3c',
       create_time: '2019-08-27 14:50:07',
     },
   ],
@@ -52,7 +52,7 @@ function getThirdList(req, res) {
   const params = req.query;
   const { name, type, sorter } = params;
   const typeList = type ? type.split(',') : [];
-  let list = data.list;
+  let list = () => data.list;
   if (name) {
     list = list.filter(item => item.name === name);
   }
@@ -69,18 +69,25 @@ function getThirdList(req, res) {
       return prev[s[0]] - next[s[0]];
     });
   }
-  data.list = list;
-  data.pagination.total = list.length;
-  return res.json({ data });
+  return res.json({
+    data: {
+      list,
+      pagination: {
+        total: list.length,
+        pageSize: 10,
+        pageIndex: 0,
+      },
+    },
+  });
 }
 
 function deleteThird(req, res) {
   // eslint
-  const { _id } = req.body;
-  const list = data.list.filter(item => item._id !== _id);
+  const { id } = req.body;
+  const list = data.list.filter(item => item.id !== id);
   return res.json({
     data: {
-      list: list,
+      list,
       pagination: {
         total: list.length,
         pageSize: 10,

@@ -24,7 +24,7 @@ class Third extends Component {
       formValues: {},
       visible: false,
       // eslint-disable-next-line
-      _id: undefined,
+      id: undefined,
     };
   }
 
@@ -106,23 +106,23 @@ class Third extends Component {
     this.setState({
       visible: true,
       // eslint-disable-next-line
-      _id: record._id,
+      id: record.id,
     });
   };
 
   handleDelete = () => {
     const { dispatch } = this.props;
     // eslint-disable-next-line
-    const { _id } = this.state;
+    const { id } = this.state;
     dispatch({
       type: 'third/remove',
       payload: {
         // eslint-disable-next-line
-        _id,
+        id,
       },
     });
     this.setState({
-      _id: undefined,
+      id: undefined,
       visible: false,
     });
   };
@@ -244,7 +244,7 @@ class Third extends Component {
             <StandardTable
               loading={loading}
               // eslint-disable-next-line
-              rowKey={record => record._id}
+              rowKey={record => record.id}
               data={data}
               columns={columns}
               onChange={this.handleStandardTableChange}

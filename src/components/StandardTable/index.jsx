@@ -15,10 +15,10 @@ class StandardTable extends PureComponent {
   constructor(props) {
     super(props);
     const { columns } = props;
-    // const needTotalList = initTotalList(columns);
+    const needTotalList = initTotalList(columns);
 
     this.state = {
-      // needTotalList,
+      needTotalList,
     };
   }
 
@@ -30,7 +30,7 @@ class StandardTable extends PureComponent {
   };
 
   render() {
-    const { initTotalneedTotalListList } = this.state;
+    const { needTotalList } = this.state;
     const { data = {}, rowKey, ...rest } = this.props;
     const { list = [], pagination } = data;
 

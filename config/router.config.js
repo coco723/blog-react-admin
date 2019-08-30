@@ -51,6 +51,11 @@ export default [
                 name: 'list',
                 component: './article/index',
               },
+              {
+                path: '/article/:id',
+                name: ':id',
+                component: './article/components/Article/index',
+              },
             ],
           }, // message
           {
