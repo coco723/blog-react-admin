@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { Input, Select, AutoComplete } from 'antd';
+import ReactMarkdown from 'react-markdown';
+// import Highlight from 'react-highlight';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -14,23 +16,33 @@ class ArticleDetail extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const { dispatch } = this.props;
-  //   dispatch({
-  //     type: 'tag/list',
-  //     payload: {}
-  //   });
-  //   dispatch({
-  //     type: 'category/list',
-  //     payload: {}
-  //   });
-  // }
+  componentDidMount() {
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'tag/list',
+    //   payload: {}
+    // });
+    // dispatch({
+    //   type: 'category/list',
+    //   payload: {}
+    // });
+    // markdown 文件高亮
+    // const els = document.querySelectorAll('pre code');
+    // for (let i = 0; i < els.length; i++) {
+    //   if (!els[i].classList.contains('js')) {
+    //     window.hljs.highlightBlock(els[i]);
+    //   }
+    // }
+  }
 
   handleChange = () => {};
 
   render() {
     const categoryList = [];
     const tags = [];
+    const content = `
+    This block of Markdown contains <a href="https://en.wikipedia.org/wiki/HTML">HTML</a>, and will require the <code>html-parser</code> AST plugin to be loaded, in addition to setting the <code class="prop">escapeHtml</code> property to false.
+    `;
     return (
       <GridContent>
         <InputGroup compact>
@@ -66,6 +78,7 @@ class ArticleDetail extends Component {
             {tags ? tags.map(item => <Option key={item.key}>{item.name}</Option>) : ''}
           </Select>
         </div>
+        <ReactMarkdown source={content} />
       </GridContent>
     );
   }

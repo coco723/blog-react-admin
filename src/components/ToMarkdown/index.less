@@ -1,0 +1,98 @@
+.page-header {
+  margin: 0;
+  padding: 10px 20px;
+  color: #fff;
+  background: #191818;
+}
+
+.editor-pane {
+  position: fixed;
+  top: 57px;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: auto;
+  overflow: auto;
+  box-shadow: -10px 2px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.result-pane > div {
+  position: fixed;
+  top: 57px;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  padding: 10px;
+  padding-left: 20px;
+  overflow: auto;
+  color: #444;
+  font-size: 16px;
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  line-height: 1.5em;
+}
+
+.editor textarea {
+  padding: 20px;
+}
+
+.editor-pane textarea {
+  min-height: 500px;
+}
+
+.markdown-controls {
+  position: relative;
+  z-index: 5;
+  float: right;
+  color: #fff;
+  text-align: right;
+}
+
+.markdown-controls form {
+  margin-right: 20px;
+  background-color: rgba(39, 40, 34, 0.5);
+}
+
+.markdown-controls legend {
+  margin: 0;
+  padding: 10px 0 0 0;
+  color: #fff;
+  font-size: 1.25em;
+  border-bottom: 0;
+}
+
+.CodeMirror {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  font-size: 16px;
+}
+
+pre {
+  border: 1px solid #ccc;
+}
+
+blockquote {
+  margin: 0;
+  padding-left: 3em;
+  color: #666;
+  border-left: 0.5em #eee solid;
+}
+
+tr {
+  background: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+th,
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+table tr:nth-child(2n) {
+  background: #f6f8fa;
+}
