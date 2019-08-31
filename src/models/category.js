@@ -1,10 +1,13 @@
-import { queryList, remove, update } from './service';
+import { queryList, remove } from '@/services/third';
 
 export default {
-  namespace: 'article',
+  namespace: 'category',
 
   state: {
-    data: {},
+    data: {
+      list: [],
+      pagination: {},
+    },
   },
 
   effects: {
@@ -15,30 +18,21 @@ export default {
         payload: response.data,
       });
     },
-    *update({ payload, callback }, { call, put }) {
-      const response = yield call(update, payload);
-      console.log('response=======', response);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-      if (callback) callback(response);
-    },
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(remove, payload);
       yield put({
         type: 'save',
         payload: response.data,
       });
-      if (callback) callback(response);
+      if (callback) callback();
     },
   },
 
   reducers: {
-    save(state, { payload }) {
+    save(state, action) {
       return {
         ...state,
-        data: payload,
+        data: action.payload,
       };
     },
   },

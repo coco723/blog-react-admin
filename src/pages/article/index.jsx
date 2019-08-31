@@ -370,7 +370,6 @@ class Article extends Component {
             <div className={styles.tableListForm}>{renderForm}</div>
             <StandardTable
               loading={loading}
-              // eslint-disable-next-line
               rowKey={record => record.id}
               data={data}
               columns={this.columns}

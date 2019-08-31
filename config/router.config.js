@@ -54,7 +54,7 @@ export default [
               {
                 path: '/article/:id',
                 name: ':id',
-                component: './article/components/Article/index',
+                component: './article/article',
               },
             ],
           }, // message

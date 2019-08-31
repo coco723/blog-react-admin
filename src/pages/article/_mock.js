@@ -118,7 +118,29 @@ function deleteArticle(req, res) {
   });
 }
 
+function updateArticle(req, res) {
+  const { id } = req.body;
+  // if (id) {
+  //   data.list.map(item => {
+  //     if (item.id === id) {
+  //       return { ...item, ...req.body };
+  //     }
+  //   });
+  // }
+  const newId = `article-${data.list.length}`;
+  data.list.unshift({
+    ...req.body,
+    id: newId,
+    create_time: new Date().getTime(),
+  });
+  return res.json({
+    success: true,
+    data: { id: id || newId },
+  });
+}
+
 export default {
   'get  /api/article_list': getArticleList,
   'delete /api/article': deleteArticle,
+  'put /api/article': updateArticle,
 };
