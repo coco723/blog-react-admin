@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { GridContent } from '@ant-design/pro-layout';
 import { Input, Select, AutoComplete, Button, message } from 'antd';
 import ReactMarkdown from 'for-editor';
-import ReactDOM from 'react-dom';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -49,7 +48,6 @@ class ArticleDetail extends Component {
 
   delete = () => {
     const { dispatch } = this.props;
-    console.log('delete......');
     dispatch({
       type: 'article/remove',
       payload: { id: this.state.id },
@@ -86,9 +84,7 @@ class ArticleDetail extends Component {
         } else {
           this.setState({
             id: response.data.id,
-            text: `已保存至草稿箱
-            <Button onclick={${this.delete}}
-            style={{  backgroundColor: '#1890ff', color: white }}>舍弃</Button>`,
+            text: '已保存至草稿箱<a >[舍弃]</a>',
           });
         }
       },
@@ -120,7 +116,6 @@ class ArticleDetail extends Component {
   };
 
   handleChange = content => {
-    const { dispatch } = this.props;
     this.setState({
       content,
     });
@@ -171,6 +166,7 @@ class ArticleDetail extends Component {
             发布文章
           </Button>
           <span
+            onClick={this.delete}
             dangerouslySetInnerHTML={{
               __html: this.state.text,
             }}

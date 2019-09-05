@@ -53,8 +53,8 @@ export default [
               },
               {
                 path: '/article/:id',
-                name: ':id',
-                component: './article/article',
+                name: 'detail',
+                component: './article/_id',
               },
             ],
           }, // message
@@ -67,6 +67,12 @@ export default [
                 path: '/message/list',
                 name: 'list',
                 component: './message/index',
+              },
+              {
+                path: '/message/:id',
+                hideInMenu: true,
+                name: 'response',
+                component: './message/_id',
               },
             ],
           }, // tag
@@ -81,7 +87,8 @@ export default [
                 component: './tag/index',
               },
             ],
-          }, // categery
+          },
+          // categery
           {
             path: '/category',
             name: 'category',
@@ -93,7 +100,8 @@ export default [
                 component: './category/index',
               },
             ],
-          }, // project
+          },
+          // project
           {
             path: '/project',
             name: 'project',
@@ -105,7 +113,8 @@ export default [
                 component: './project/index',
               },
             ],
-          }, // account
+          },
+          // account
           {
             path: './account',
             name: 'account',

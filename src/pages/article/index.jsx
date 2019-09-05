@@ -3,9 +3,9 @@ import { connect } from 'dva';
 import { GridContent } from '@ant-design/pro-layout';
 import { Card, Form, Input, Row, Col, Button, Modal, Tag, Divider } from 'antd';
 import moment from 'moment';
+import Link from 'umi/link';
 import StandardTable from '@/components/StandardTable';
 import styles from './index.less';
-import blogDomain from '@/utils/domain';
 
 // 0：博主，1：其他 ，2：Github， 3：Wechat， 4：QQ
 const stateText = ['草稿', '已发布'];
@@ -159,13 +159,7 @@ class Article extends Component {
           </Fragment>
           <Divider type="vertical" />
           <Fragment>
-            <a
-              href={`${blogDomain}articleDetail?article_id=${record.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              详情
-            </a>
+            <Link to={`/article/${record.id}`}>详情</Link>
           </Fragment>
           <Divider type="vertical" />
           <Fragment>
@@ -188,7 +182,6 @@ class Article extends Component {
     this.state = {
       formValues: {},
       visible: false,
-      // eslint-disable-next-line
       id: undefined,
       op: '',
     };
@@ -295,7 +288,6 @@ class Article extends Component {
     }
     this.setState({
       visible: true,
-      // eslint-disable-next-line
       id: record.id,
       op,
     });
@@ -303,7 +295,6 @@ class Article extends Component {
 
   handleSubmit = () => {
     const { dispatch } = this.props;
-    // eslint-disable-next-line
     const { id } = this.state;
     switch (this.state.op) {
       case 'delete':
@@ -379,7 +370,7 @@ class Article extends Component {
         </Card>
         <Modal
           title="确认框"
-          visible={this.state.visible}
+          visible={visible}
           onOk={this.handleSubmit}
           onCancel={this.handleClose}
           okText="确认"

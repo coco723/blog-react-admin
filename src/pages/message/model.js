@@ -1,7 +1,7 @@
-import { queryList, remove, update } from './service';
+import { queryList, query, remove, update } from './service';
 
 export default {
-  namespace: 'article',
+  namespace: 'msg',
 
   state: {
     data: {},
@@ -10,6 +10,13 @@ export default {
   effects: {
     *fetch({ payload }, { call, put }) {
       const response = yield call(queryList, payload);
+      yield put({
+        type: 'save',
+        payload: response.data,
+      });
+    },
+    *detail({ payload }, { call, put }) {
+      const response = yield call(query, payload);
       yield put({
         type: 'save',
         payload: response.data,

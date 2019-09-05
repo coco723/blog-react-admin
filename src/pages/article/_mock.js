@@ -66,7 +66,6 @@ const data = {
 
 function getArticleList(req, res) {
   const params = req.query;
-  console.log('params = ', params);
   const { title, state, sorter, origin } = params;
   const stateList = state ? state.split(',') : [];
   const originList = origin ? origin.split(',') : [];
@@ -115,6 +114,7 @@ function deleteArticle(req, res) {
         pageIndex: 0,
       },
     },
+    success: true,
   });
 }
 

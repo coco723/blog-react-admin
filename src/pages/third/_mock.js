@@ -52,7 +52,7 @@ function getThirdList(req, res) {
   const params = req.query;
   const { name, type, sorter } = params;
   const typeList = type ? type.split(',') : [];
-  let list = () => data.list;
+  let { list } = data;
   if (name) {
     list = list.filter(item => item.name === name);
   }
