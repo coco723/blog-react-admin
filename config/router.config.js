@@ -130,11 +130,6 @@ export default [
                 path: '/account/settings',
                 component: './account/settings',
               },
-              {
-                name: 'settings',
-                path: '/account/settings',
-                component: './account/settings',
-              },
             ],
           }, // exception
           {

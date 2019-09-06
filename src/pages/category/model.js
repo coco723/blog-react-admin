@@ -1,13 +1,10 @@
-import { queryList, remove } from '@/services/third';
+import { queryList, remove, create } from './service';
 
 export default {
   namespace: 'category',
 
   state: {
-    data: {
-      list: [],
-      pagination: {},
-    },
+    data: {},
   },
 
   effects: {
@@ -20,6 +17,14 @@ export default {
     },
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(remove, payload);
+      yield put({
+        type: 'save',
+        payload: response.data,
+      });
+      if (callback) callback();
+    },
+    *create({ payload, callback }, { call, put }) {
+      const response = yield call(create, payload);
       yield put({
         type: 'save',
         payload: response.data,

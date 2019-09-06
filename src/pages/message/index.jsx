@@ -76,7 +76,7 @@ class Message extends Component {
       dataIndex: '',
       render: (text, record) => (
         <div>
-          <Link to={`/msg/id=${record.id}`}>回复</Link>
+          <Link to={`/message/id=${record.id}`}>回复</Link>
           <Divider type="vertical" />
           <Fragment>
             <a
