@@ -23,9 +23,8 @@ class ArticleDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: [],
-      titile: '',
-      origin: origin[0],
+      title: '',
+      origin: 0,
       tags: '',
       category: '',
       content: defaultValue,
@@ -36,6 +35,14 @@ class ArticleDetail extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    if (this.props.match.params.id.indexOf(':') !== -1) {
+      dispatch({
+        type: 'article/detail',
+        payload: {
+          id: this.props.match.params.id,
+        },
+      });
+    }
     // dispatch({
     //   type: 'tag/list',
     //   payload: {}
@@ -46,7 +53,7 @@ class ArticleDetail extends Component {
     // });
   }
 
-  delete = () => {
+  handleDelete = () => {
     const { dispatch } = this.props;
     dispatch({
       type: 'article/remove',
@@ -99,10 +106,9 @@ class ArticleDetail extends Component {
     this.updateChange();
   };
 
-  originChange = e => {
-    e.preventDefault();
+  originChange = value => {
     this.setState({
-      origin: e.target.value,
+      origin: value,
     });
     this.updateChange();
   };
@@ -140,6 +146,7 @@ class ArticleDetail extends Component {
       callback: response => {
         if (!response.success) {
           this.setState({
+            id: undefined,
             text: '文章发布成功',
           });
           message.error('文章发布成功');
@@ -166,30 +173,29 @@ class ArticleDetail extends Component {
             发布文章
           </Button>
           <span
-            onClick={this.delete}
+            onClick={this.handleDelete}
             dangerouslySetInnerHTML={{
               __html: this.state.text,
             }}
           />
         </div>
         <div style={{ marginTop: 15 }}>
-          <InputGroup compact>
-            <Select
-              style={{ width: '10%' }}
-              defaultValue={this.state.origin}
-              onChange={this.originChange}
-            >
-              {origin.map((item, key) => (
-                <Option value={key}>{item}</Option>
-              ))}
-            </Select>
-            <AutoComplete
-              dataSource={this.state.dataSource}
-              style={{ width: '90%' }}
-              onChange={this.titleChange}
-              placeholder="标题: 那是我夕阳下的奔跑"
-            />
-          </InputGroup>
+          <Select
+            style={{ width: '10%' }}
+            defaultValue={this.state.origin}
+            onChange={this.originChange}
+          >
+            {origin.map((item, key) => (
+              <Option value={key}>{item}</Option>
+            ))}
+          </Select>
+          <Input
+            style={{ marginTop: 15, width: '90%' }}
+            placeholder="标题: 那是我夕阳下的奔跑"
+            name="name"
+            value={this.state.title}
+            onChange={this.titleChange}
+          />
         </div>
         <div style={{ marginTop: 15 }}>
           <Select

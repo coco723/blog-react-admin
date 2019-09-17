@@ -139,8 +139,15 @@ function updateArticle(req, res) {
   });
 }
 
+function getArticle(req, res) {
+  const { id } = req.query;
+  const article = data.list.map(item => item.id === id);
+  return res.json({ data: article });
+}
+
 export default {
-  'get  /api/article_list': getArticleList,
+  'get /api/article_list': getArticleList,
   'delete /api/article': deleteArticle,
   'put /api/article': updateArticle,
+  'get /api/article': getArticle,
 };

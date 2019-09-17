@@ -1,4 +1,4 @@
-import { queryList, remove, update } from './service';
+import { queryList, remove, update, detail } from './service';
 
 export default {
   namespace: 'article',
@@ -30,6 +30,13 @@ export default {
         payload: response,
       });
       if (callback) callback(response);
+    },
+    *detail({ payload }, { call, put }) {
+      const response = yield call(detail, payload);
+      yield put({
+        type: 'save',
+        payload: response.data,
+      });
     },
   },
 

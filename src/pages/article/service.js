@@ -18,3 +18,7 @@ export async function remove(params) {
     data: params,
   });
 }
+
+export async function detail(params) {
+  return request(`/api/article?${stringify(params)}`);
+}
